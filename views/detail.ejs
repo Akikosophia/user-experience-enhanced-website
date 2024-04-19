@@ -1,0 +1,38 @@
+<%- include('./partials/head') %>
+
+<main>
+
+<img src="/assets/oba_20.png" class="oba-logo" alt="oba-logo">
+    
+  <div class="zoek-balk">
+      <div class="zoek-balk-menu">
+          <i class='bx bx-search icon'></i>
+      <input type="text" placeholder="">
+  </div>  
+
+  <article class="detail">
+
+<% items.forEach(item => { %>
+    <article class="details">
+         <a href="./detail/<%= item.id %>" class="item-detail">
+            <% if (item.afbeelding) { %>
+         <h2 class="item-titel"> <%= item.title %></h2></a>
+    <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
+<% } %> 
+
+            
+<form method="POST" action="/detail/<%= item.id %>">
+    <button> Voeg toe aan leeslijst</button>
+         </form>
+           <button><a href="/leeslijst"> Leeslijst </a></button>
+          <p class="item-samenvatting"><%- item.description %></p>
+        </article>
+    <!-- <button class="like-button">❤️</button> -->
+<% }) %> 
+
+</article>
+ <!-- popup dialog--> 
+
+</main>
+
+<%- include('./partials/foot') %>

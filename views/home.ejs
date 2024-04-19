@@ -1,0 +1,46 @@
+<%- include('./partials/head') %>
+
+
+<main>
+
+<img src="/assets/oba_20.png" class="oba-logo" alt="oba-logo">
+    
+
+<div class="zoek-balk">
+    <div class="zoek-balk-menu">
+         <i class='bx bx-search icon'></i>
+    <input type="text" placeholder="">
+</div>  
+
+<a>terug</a>
+
+<h1 class="welkom-tekst"> Welkom Akiko</h1>
+
+<article class="profielen-container">
+
+    
+<% profiles.forEach(profile => { %>
+    <article class="profielen">
+        <a href="./index/<%= profile.id %>" class="profile-text">
+           <% if (profile.avatar) { %>
+             <img src="https://fdnd-agency.directus.app/assets/<%= profile.avatar %>" class="profile-avatars" alt="">
+               <div class="profile-name"><%= profile.name %></a></div><details>
+                <summary>Gegevens</summary><div>adres</div>
+                 </details><details>
+                  <summary>Beschikbaarheid</summary><div>adres</div>
+                  </details><details>
+                 <summary>Meer info</summary><div>adres</div>
+              </details>
+         <% } %>
+    </article>
+<% }) %>
+
+    
+</article>
+
+<!-- <section class="overview"><h1><a href="/overview"> Back</a></h1></section> -->
+<!-- <section class="home"> -->
+
+</main>
+
+<%- include('./partials/foot') %>
