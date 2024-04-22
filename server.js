@@ -9,10 +9,6 @@ import express, { application, json } from 'express'
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
 import fetchJson from './helpers/fetch-json.js'
 
-import favorietenlijst from './helpers/fetch-json.js';
-
-console.log(favorietenlijst);
-
 // Maak een nieuwe express app aan
 const app = express()
 
@@ -35,28 +31,6 @@ const apiProfile = (apiUrl + 'oba_profile')
 
 const apiItem = (apiUrl + 'oba_item')
 
-// dit is de home page & family
-
-// app.get('/', function(request, response) {
-//     fetchJson(apiItem).then((items) => { console.log(items.data)
-//         response.render('index', {
-           
-//             items: items.data/*hier zeg ik dat iedereen getoond moet worden*/
-//         });
-//     })
-//     console.log(apiItem) 
-// })
-
-// app.get('/', function(request, response) {
-//     fetchJson(apiFamily + '?fields=*,afbeelding.id,afbeelding.height,afbeelding.width').then((items) => { console.log(items.data)
-//         response.render('index', {
-           
-//             items: items.data/*hier zeg ik dat iedereen getoond moet worden*/
-//         });
-//     })
-//     console.log(apiFamily) 
-// })
-
 // dit is de index pagina // met alle items van OBA
 // hier vraag ik om de afbeeldingen in te laden met de originele width en height
 
@@ -72,8 +46,6 @@ app.get('/', function(request, response) {
 
 // books
 
-
-//
 
 app.get('/home', async function(request, response) {
     
@@ -93,8 +65,6 @@ app.get('/home', async function(request, response) {
       response.status(500).send('Internal Server Error');
     }
   });
- 
-
 
 // detail
 
@@ -108,11 +78,29 @@ app.get('/detail/:id', function(request, response) {
   
 })
 
-
-// get route voor leeslijst hieronder
-
-
 // leeslijst
+
+app.get('/leeslijst', function(request, response) {
+  fetchJson(apiItem).then((items) => { console.log(items.data);
+  
+let itemsOpLeeslijst = []
+
+items.data.forEach(function(item) {
+  if (leeslijst[item.id]) {
+    itemsOpLeeslijst.push(item)
+  }
+})
+
+if (itemsOpLeeslijst.length) {
+    response.render('leeslijst', {
+        items: itemsOpLeeslijst
+    });
+} else {
+    console.error("Invalid or unexpected API response format");
+    response.status(500).send("Internal Server Error");
+}
+});
+});
 
 
 let leeslijst = {}
@@ -126,28 +114,6 @@ app.post ('/detail/:id', function(request, response) {
       
 });
 
-
-app.get('/leeslijst', function(request, response) {
-    fetchJson(apiItem).then((items) => { console.log(items.data);
-    
-let itemsOpLeeslijst = []
-
-items.data.forEach(function(item) {
-    if (leeslijst[item.id]) {
-      itemsOpLeeslijst.push(item)
-    }
-  })
-
-  if (itemsOpLeeslijst.length) {
-      response.render('leeslijst', {
-          items: itemsOpLeeslijst
-      });
-  } else {
-      console.error("Invalid or unexpected API response format");
-      response.status(500).send("Internal Server Error");
-  }
-});
-});
 
 
   // Stel het poortnummer in waar express op moet gaan luisteren
