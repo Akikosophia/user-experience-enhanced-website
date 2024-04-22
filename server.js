@@ -9,6 +9,10 @@ import express, { application, json } from 'express'
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
 import fetchJson from './helpers/fetch-json.js'
 
+import favorietenlijst from './helpers/fetch-json.js';
+
+console.log(favorietenlijst);
+
 // Maak een nieuwe express app aan
 const app = express()
 

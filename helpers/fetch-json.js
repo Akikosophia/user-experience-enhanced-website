@@ -19,3 +19,6 @@ export default async function fetchJson(url, payload = {}) {
       .catch((error) => error)
   }
   
+  let favorietenlijst = {};
+
+  export { favorietenlijst };
