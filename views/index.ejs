@@ -11,7 +11,7 @@
 </div>  
 
 
-<h3 class="titel-favorieten"> Overzichts pagina</h3>
+<h3 class="titel-favorieten"> Overzichtspagina</h3>
 
 <article class="scroll-container">
 
@@ -21,12 +21,44 @@
       <a href="./detail/<%= item.id %>" class="titel-items">
           <% if (item.afbeelding) { %> 
             <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"  width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>" class="items-afbeeldingen"  alt="" >
-            <% } %><div class="item-titels"><%= item.title %></div></a>
+         <% } %><div class="item-titels"><%= item.title %></div></a>
     </article>
 <% }) %>
 
 
 </article>
+
+
+<article class="scroll-container">
+
+
+   <% items.forEach(item => { %>
+      <article class="scroll-items"> 
+         <a href="./detail/<%= item.id %>" class="titel-items">
+             <% if (item.afbeelding) { %> 
+               <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"  width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>" class="items-afbeeldingen"  alt="" >
+               <% } %><div class="item-titels"><%= item.title %></div></a>
+       </article>
+   <% }) %>
+   
+   
+   </article>
+
+
+   <article class="scroll-container">
+
+
+      <% items.forEach(item => { %>
+         <article class="scroll-items"> 
+            <a href="./detail/<%= item.id %>" class="titel-items">
+                <% if (item.afbeelding) { %> 
+                  <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"  width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>" class="items-afbeeldingen"  alt="" >
+                  <% } %><div class="item-titels"><%= item.title %></div></a>
+          </article>
+      <% }) %>
+      
+      
+      </article>
 
 </main>
 
