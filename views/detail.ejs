@@ -20,7 +20,6 @@
             <% if (item.afbeelding) { %>
          <h2 class="item-titel"> <%= item.title %></h2></a>
     <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
-
 <% } %> 
 
             
@@ -28,11 +27,13 @@
     <button> Voeg toe aan leeslijst</button>
          </form>
            <button><a href="/leeslijst"> Leeslijst </a></button>
-           <h3 class="samenvatting">Samenvatting</h3>
+             <h3 class="samenvatting">Samenvatting</h3>
           <p class="item-samenvatting"><%- item.description %></p>
         </article>
     <!-- <button class="like-button">❤️</button> -->
 <% }) %> 
+
+
 
 </article>
  <!-- popup dialog--> 

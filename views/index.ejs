@@ -20,13 +20,35 @@
    <article class="scroll-items"> 
       <a href="./detail/<%= item.id %>" class="titel-items">
           <% if (item.afbeelding) { %> 
-            <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"  width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>" class="items-afbeeldingen"  alt="" >
-         <% } %><div class="item-titels"><%= item.title %></div></a>
+            <picture>
+              <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
+               <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
+                <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"  width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>" class="items-afbeeldingen"  alt="" >
+              </picture>
+            <% } %><div class="item-titels"><%= item.title %>
+         <!-- <form method="POST" action="" >
+    <input type="submit" value="submit">
+<label>
+
+<button class="bookmark">
+<svg viewBox="0 0 36 36">
+     <path class="filled" d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
+          <path class="default" d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
+              <path class="corner" d="M10 6C10 6 14.8758 6 18 6C21.1242 6 26 6 26 6C26 6 26 6 26 6H10C10 6 10 6 10 6Z" />
+                </svg></button>
+             </label>
+          </form> -->
+      </div></a>
     </article>
 <% }) %>
 
 
+
 </article>
+
+<i class='bx bx-chevron-right toggle'></i>
+
+
 
 
 <article class="scroll-container">

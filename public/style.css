@@ -70,6 +70,11 @@ section {
     z-index: 2;
 }
 
+p.copyright {
+    position: absolute;
+    left: 110px;
+}
+
 /* ===== Profiel pagina ===== */
 
 h1.welkom-tekst {
@@ -153,7 +158,7 @@ details {
     padding: 0.2em;
 }  
 
-/* ===== Scroll bar home page ===== */
+/* ===== Home page + carousel ===== */
 
 h3.titel-favorieten {
     margin-left: 6em;
@@ -162,9 +167,9 @@ h3.titel-favorieten {
 
 .scroll-container {
     display: flex;
-    width: 55em;
+    width: 90em;
     margin: auto;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -176,13 +181,13 @@ h3.titel-favorieten {
 
 .scroll-items {
     flex: 0 auto;
-    width: 55em; 
+    width: 90em; 
     scroll-snap-align: start;
     background-color: var(--sidebar-color); 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20em;
+    height: 22em;
     padding: 15px;
 }
 
@@ -196,6 +201,17 @@ img.items-afbeeldingen {
 img.items-afbeeldingen:hover { 
     background-color: white; 
 }
+/* 
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.bookmark {
+    width: 50px;
+    height: 50px;
+    color: var(--text-color);
+} */
 
 
 /* =====  Oba logo & Zoekbalk ===== */
@@ -280,14 +296,15 @@ img.item-afbeelding {
 
 /* ===== Detail pagina ===== */
 
+
 a.back {
     text-decoration: none;
 }
 
 .back {
-    top:11%;
+    margin-top: 4em ;
     position: absolute;
-    left: 33%;
+    left: 110px;
     padding: .3em .6em;
     border: 1px solid transparent;
     border-radius: .5rem;
@@ -696,38 +713,16 @@ body.dark .home .text {
     }
 
     @media (min-width:425px) {
-      
-
-        /* .profielen {
-            margin-right: 6.7em;
-        }
-         */
+    
 
         article .profielen {
             margin-left: 6.5em; 
         }
 
-        /* .profielen {
-            width: 14.5em;
-    
-        } */
      
 }
-/*     
-    img.profile-avatars {
-        height: 8em;
-        margin-left: 1.5em;
-    }
+
     
-    .profile-name {
-        margin-left: 4.5em;
-        margin-top: 1em;
-        margin-bottom: 1em;
-    } */
-        
-
-
-
 
     @media (min-width:600px) {
          

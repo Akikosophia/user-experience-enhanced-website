@@ -23,15 +23,21 @@
     <article class="profielen">
         <a href="./index/<%= profile.id %>" class="profile-text">
            <% if (profile.avatar) { %>
-             <img src="https://fdnd-agency.directus.app/assets/<%= profile.avatar %>" class="profile-avatars" alt="">
-               <div class="profile-name"><%= profile.name %></a></div><details>
-                <summary>Gegevens</summary><div>adres</div>
-                  </details><details>
-                    <summary>Beschikbaarheid</summary><div>Boek</div>
-                     </details><details>
-                   <summary>Abonnement</summary><div>Type abonnement
-                <div>Lidnummer</div></div>
-              </details>
+            <picture>
+              <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
+          <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
+    <img src="https://fdnd-agency.directus.app/assets/<%= profile.avatar %>" class="profile-avatars" alt="">
+</picture>
+
+
+<div class="profile-name"><%= profile.name %></a></div><details>
+    <summary>Gegevens</summary><div>adres</div>
+        </details><details>
+            <summary>Beschikbaarheid</summary><div>Boek</div>
+              </details><details>
+                 <summary>Abonnement</summary><div>Type abonnement
+              <div>Lidnummer</div></div>
+            </details>
          <% } %>
     </article>
 <% }) %>

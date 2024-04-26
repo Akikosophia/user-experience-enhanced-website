@@ -95,6 +95,7 @@ if (itemsOpLeeslijst.length) {
     response.render('leeslijst', {
         items: itemsOpLeeslijst
     });
+    
 } else {
     console.error("Invalid or unexpected API response format");
     response.status(500).send("Internal Server Error");
@@ -113,6 +114,10 @@ app.post ('/detail/:id', function(request, response) {
    response.redirect(303, '/detail/' + id + '?added=true');
       
 });
+
+
+// favorieten
+
 
 
 
