@@ -527,7 +527,7 @@ p.item-samenvatting {
     width: 250px;
     padding: 10px 14px;
     background: var(--sidebar-color);
-    transition: var(--tran-05);
+    /* transition: var(--tran-05); */
     z-index: 100;  
 }
 
@@ -578,7 +578,7 @@ p.item-samenvatting {
 
 .sidebar .text-long, .sidebar .icon{
         color: var(--text-color);
-        transition: var(--tran-03);
+        /* transition: var(--tran-03); */
 }
     
 .sidebar .text-long{
