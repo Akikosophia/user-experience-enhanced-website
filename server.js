@@ -5,7 +5,7 @@
 
 // Importeer het npm pakket express uit de node_modules map
 import express, { application, json } from 'express'
-
+import cookieParser from 'cookie-parser'
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
 import fetchJson from './helpers/fetch-json.js'
 
@@ -20,8 +20,9 @@ app.set('views', './views')
 
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
 app.use(express.static('public'))
+app.use(cookieParser())
 
-app.use(express.urlencoded({extended: true }))
+app.use(express.urlencoded({ extended: true }))
 
 const apiUrl = "https://fdnd-agency.directus.app/items/"
 
@@ -34,85 +35,135 @@ const apiItem = (apiUrl + 'oba_item')
 // dit is de index pagina // met alle items van OBA
 // hier vraag ik om de afbeeldingen in te laden met de originele width en height
 
-app.get('/', function(request, response) {
-    fetchJson(apiItem + '?fields=*,afbeelding.id,afbeelding.height,afbeelding.width').then((items) => { console.log(items.data)
-        response.render('index', {
-           
-            items: items.data/*hier zeg ik dat iedereen getoond moet worden*/
-        });
-    })
+app.get('/', function (request, response) {
+  fetchJson(apiItem + '?fields=*,afbeelding.id,afbeelding.height,afbeelding.width').then((items) => {
+    console.log(items.data)
+    response.render('index', {
+
+      items: items.data/*hier zeg ik dat iedereen getoond moet worden*/
+    });
+  })
 })
 
 
 // books
 
 
-app.get('/home', async function(request, response) {
-    
-    try {
-      const families = await fetchJson(apiFamily);
-      const profiles = await fetchJson(apiProfile);
- 
+app.get('/home', async function (request, response) {
+
+  try {
+    const families = await fetchJson(apiFamily);
+    const profiles = await fetchJson(apiProfile);
+
     //   console.log(families.data);
     //   console.log(profiles.data);
- 
-      response.render('home', {
-        families: families.data,
-        profiles: profiles.data,
-      });
-    } catch (error) {
+
+    response.render('home', {
+      families: families.data,
+      profiles: profiles.data,
+    });
+  } catch (error) {
     //   console.error('Error fetching data:', error);
-      response.status(500).send('Internal Server Error');
-    }
-  });
+    response.status(500).send('Internal Server Error');
+  }
+});
 
 // detail
 
-app.get('/detail/:id', function(request, response) {
-    fetchJson(apiItem + '?filter={"id":' + request.params.id + '}').then((items) => {
-        response.render('detail', {
+app.get('/detail/:id', function (request, response) {
+  fetchJson(apiItem + '?filter={"id":' + request.params.id + '}').then((items) => {
+    response.render('detail', {
 
-            items: items.data/*hier zeg ik dat iedereen getoond moet worden*/
-        });
-    })
-  
+      items: items.data/*hier zeg ik dat iedereen getoond moet worden*/
+    });
+  })
+
 })
 
 // leeslijst
 
-app.get('/leeslijst', function(request, response) {
-  fetchJson(apiItem).then((items) => { console.log(items.data);
-  
-let itemsOpLeeslijst = []
+app.get('/leeslijst', function (request, response) {
+  fetchJson(apiItem).then((items) => {
+    let loadingStatus = "loading";
+    let itemsOpLeeslijst = []
+    // console.log(request.cookies.leeslijst)
+    console.log(request.cookies);
+    items.data.forEach(function (item) {
+      // turn id into string so it corresponds with the cookie ids;
+      const id = `${item.id}`
+      if (request.cookies.leeslijst && request.cookies.leeslijst.includes(id)) {
+        itemsOpLeeslijst.push(item)
+        console.log('gets here')
+      }
+    })
 
-items.data.forEach(function(item) {
-  if (leeslijst[item.id]) {
-    itemsOpLeeslijst.push(item)
-  }
-})
-
-if (itemsOpLeeslijst.length) {
-    response.render('leeslijst', {
+    if (itemsOpLeeslijst.length) {
+      response.render('leeslijst', {
         items: itemsOpLeeslijst
-    });
-    
-} else {
-    console.error("Invalid or unexpected API response format");
-    response.status(500).send("Internal Server Error");
-}
+      });
+
+
+      if (itemsOpLeeslijst.length === 0) {
+        loadingStatus = "empty";
+      } else {
+        loadingStatus = "success";
+      }
+
+      response.render('leeslijst', {
+        loadingStatus: loadingStatus,
+        items: itemsOpLeeslijst
+      });
+
+
+      //   if (itemsOpLeeslijst.length === 0) {
+      //     // Rendeer de lege staat
+      //     response.render('emptyState');
+      // } else {
+      //     // Rendeer de items
+      //     response.render('leeslijst', {
+      //         items: itemsOpLeeslijst
+      //     });
+      // }
+
+    } else {
+      response.render('leeslijst', {
+        loadingStatus: loadingStatus,
+        items: []
+      });
+      // console.error("Invalid or unexpected API response format");
+      // response.status(500).send("Internal Server Error");
+    }
+  });
 });
-});
 
 
-let leeslijst = {}
+let leeslijst = []
 
-app.post ('/detail/:id', function(request, response) {
-   const id = request.params.id;
+app.post('/detail/:id', function (request, response) {
+  request.cookies.leeslijst = JSON.parse(request.cookies.leeslijst)
+  
+  if (request.cookies.leeslijst) {
+    leeslijst = request.cookies.leeslijst
+  } 
+  fetchJson(apiItem + '?filter={"id":' + request.params.id + '}').then((items) => {
+    const book =  items.data[0]
+    // console.log(book)
+    leeslijst.push(request.params.id)
+    // Jammerdepammer:
+    // leeslijst[id] = {
+    //   id: book.id,
+    //   title: book.title,
+    //   afbeelding: book.afbeelding,
+    // };
+    // Save leeslijst in cookie called 'leeslijst'
+    console.log('lijst:' + leeslijst);
+    response.cookie('leeslijst', leeslijst, { maxAge: 900000, httpOnly: false });
+    response.redirect(303, '/detail/' + request.params.id + '?added=true');
+  })
 
-   leeslijst[id] = true;
 
-   response.redirect(303, '/detail/' + id + '?added=true');
-      
+  // send succes state // 
+
 });
 
 
@@ -120,8 +171,7 @@ app.post ('/detail/:id', function(request, response) {
 
 
 
-
-  // Stel het poortnummer in waar express op moet gaan luisteren
+// Stel het poortnummer in waar express op moet gaan luisteren
 app.set('port', process.env.PORT || 8000)
 
 // Start express op, haal daarbij het zojuist ingestelde poortnummer op

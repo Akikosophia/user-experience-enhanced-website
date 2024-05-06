@@ -1,33 +1,29 @@
 <%- include('./partials/head') %>
 
-<main>
+    <main>
 
-    <img src="/assets/oba_20.png" class="oba-logo" alt="oba-logo">
-    
+            <article class="scroll-lijst">
+                <% if (items.length) { %>
+                    <ul class="leeslijst">
+                        <% items.forEach(item=> { %>
+                            <li class="leeslijst-item">
+                                <% if (item.afbeelding) { %>
+                                    <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>"
+                                    class="item-afbeelding" alt="">
+                                <% } %>
+                                <h2>
+                                    <a href="./detail/<%= item.id %>">
+                                        <%= item.title %></a>
+                                    </a>
+                                </h2>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>                
+                    <h1>OH NEE</h1>
+                <% } %>                
+            </article>
+    </main>
 
-<div class="zoek-balk">
-    <div class="zoek-balk-menu">
-         <i class='bx bx-search icon'></i>
-    <input type="text" placeholder="">
-</div>  
 
-
-<article class="scroll-lijst">
-<ul class="leeslijst">
-    <% items.forEach(item => { %>
-        <article class="lees-lijst"><li>
-           <a href="./detail/<%= item.id %>"></a>
-             </li>
-             <% if (item.afbeelding) { %>
-            <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
-        <% } %>
-        <h2><%= item.title %></a></h2>
-<% }); %>
-</ul></article>
-
-
-</article>
-
-</main>
-
-<%- include('./partials/foot') %>
+    <%- include('./partials/foot') %>

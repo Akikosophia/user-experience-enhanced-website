@@ -1,43 +1,61 @@
 <%- include('./partials/head') %>
 
-<main>
-
-<img src="/assets/oba_20.png" class="oba-logo" alt="oba-logo">
-    
-  <div class="zoek-balk">
-       <div class="zoek-balk-menu">
-          <i class='bx bx-search icon'></i>
-        <input type="text" placeholder="">
-  </div>  
-
-<a href="/" class="back"> terug </a>
-
-  <article class="detail">
-
-<% items.forEach(item => { %>
-    <article class="details">
-         <a href="./detail/<%= item.id %>" class="item-detail">
-            <% if (item.afbeelding) { %>
-         <h2 class="item-titel"> <%= item.title %></h2></a>
-    <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
-<% } %> 
-
-            
-<form method="POST" action="/detail/<%= item.id %>">
-    <button> Voeg toe aan leeslijst</button>
-         </form>
-           <button><a href="/leeslijst"> Leeslijst </a></button>
-             <h3 class="samenvatting">Samenvatting</h3>
-          <p class="item-samenvatting"><%- item.description %></p>
-        </article>
-    <!-- <button class="like-button">❤️</button> -->
-<% }) %> 
+  <main>
 
 
+      <a href="/" class="back"> terug </a>
 
-</article>
- <!-- popup dialog--> 
+      <article class="detail">
 
-</main>
+        <% items.forEach(item=> { %>
+          <article class="details">
+            <a href="./detail/<%= item.id %>" class="item-detail">
+              <% if (item.afbeelding) { %>
+                <h2 class="item-titel">
+                  <%= item.title %>
+                </h2>
+            </a>
 
-<%- include('./partials/foot') %>
+            <article class="flex-container">
+
+            <article class="container">
+            <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
+            <% } %>
+
+
+              <form method="POST" action="/detail/<%= item.id %>" class="add-item">
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <input type="hidden" name="title" value="<%= item.title %>">
+                <input type="hidden" name="afbeeling" value="<%= item.afbeelding %>">
+                <button class="leeslijst-button" type="submit">voeg toe aan leeslijst</button>
+                <!-- <button class="leeslijst-btn"> Voeg toe aan leeslijst</button> -->
+              </form>
+         
+             
+              <form method="POST" action="/detail/<%= item.id %>" class="reserveer-item">
+
+                <button class="reserveer-button" type="submit">reserveer</button>
+                <!-- <button class="leeslijst-btn"> Voeg toe aan leeslijst</button> -->
+              </form>
+          
+
+            </article>
+
+            <article class="section">
+              <h3 class="samenvatting">Samenvatting</h3>
+              <p class="item-samenvatting"><%- item.description %></p>
+            </article>
+          </article>
+
+          </article>
+          <!-- <button class="like-button">❤️</button> -->
+          <% }) %>
+
+
+
+      </article>
+      <!-- popup dialog-->
+
+  </main>
+
+  <%- include('./partials/foot') %>
