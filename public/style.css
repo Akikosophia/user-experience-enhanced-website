@@ -560,7 +560,7 @@ p.item-samenvatting {
 
 .sidebar .text, .sidebar .icon{
     color: var(--text-color);
-    transition: var(--tran-03);
+    /* transition: var(--tran-03); */
  }
     
 
