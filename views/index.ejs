@@ -3,7 +3,7 @@
    <main>
 
          <h1 class="titel-favorieten"> Overzichtspagina</h1>
-         <h2 class="books">Books</h2>
+         <!-- <h2 class="books">Books</h2> -->
 
          <button class="next" id="scroll-to-right">
             <svg version="1.1" id="icons_1_" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128"
@@ -17,22 +17,11 @@
                </g>
             </svg>
          </button>
-         <button class="prev" id="scroll-to-left">
+         <button class="prev" id="scroll-to-left" disabled>
             <svg version="1.1" id="icons_1_" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128"
                style="enable-background:new 0 0 128 128" xml:space="preserve">
-               <style>
-                  .st0 {
-                     display: none
-                  }
+          
 
-                  .st1 {
-                     display: inline
-                  }
-
-                  .st2 {
-                     fill: #0a0a0a
-                  }
-               </style>
                <g id="row2_1_">
                   <g id="_x31__4_">
                      <path class="st2"
@@ -43,6 +32,48 @@
             </svg>
          </button>
 
+         <article class="scroll-container">
+            <% items.forEach(item=> { %>
+               <article class="scroll-items">
+                  <div class="text-box">
+                     <%= item.auteur %>
+                  </div>
+                  <div class="box">
+                     <a href="./detail/<%= item.id %>" class="titel-items">
+                        <%= item.title %>
+                     </a>
+                  </div>
+                  <div class="bookmark">
+                     <form method="POST" action="">
+                        <input type="submit" value="submit">
+                        <label>
+                           <button class="bookmark" >
+                              <svg viewBox="0 0 36 36">
+                                 <path class="filled"
+                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
+                                 <path class="default"
+                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
+                                 <path class="corner"
+                                    d="M10 6C10 6 14.8758 6 18 6C21.1242 6 26 6 26 6C26 6 26 6 26 6H10C10 6 10 6 10 6Z" />
+                              </svg>
+                           </button>
+                        </label>
+                     </form>
+                  </div>
+                  <% if (item.afbeelding) { %>
+                     <picture>
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
+                        <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"
+                           width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>"
+                           class="items-afbeeldingen" alt="">
+                     </picture>
+                     <% } %>
+               </article>
+               <% }) %>
+         </article>
+
+  
          <article class="scroll-container">
             <% items.forEach(item=> { %>
                <article class="scroll-items">
@@ -74,8 +105,8 @@
                   <% if (item.afbeelding) { %>
                      <picture>
                         <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
-                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
-                        <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"
+               <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
+                        <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>" loading="lazy"
                            width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>"
                            class="items-afbeeldingen" alt="">
                      </picture>
@@ -84,46 +115,6 @@
                <% }) %>
          </article>
 
-         <article class="scroll-container">
-            <% items.forEach(item=> { %>
-               <article class="scroll-items">
-                  <div class="text-box">
-                     <%= item.auteur %>
-                  </div>
-                  <div class="box">
-                     <a href="./detail/<%= item.id %>" class="titel-items">
-                        <%= item.title %>
-                     </a>
-                  </div>
-                  <div class="bookmark">
-                     <form method="POST" action="">
-                        <input type="submit" value="submit">
-                        <label>
-                           <button class="bookmark">
-                              <svg viewBox="0 0 36 36">
-                                 <path class="filled"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="default"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="corner"
-                                    d="M10 6C10 6 14.8758 6 18 6C21.1242 6 26 6 26 6C26 6 26 6 26 6H10C10 6 10 6 10 6Z" />
-                              </svg>
-                           </button>
-                        </label>
-                     </form>
-                  </div>
-                  <% if (item.afbeelding) { %>
-                     <picture>
-                  <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
-               <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
-                        <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"
-                           width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>"
-                           class="items-afbeeldingen" alt="">
-                     </picture>
-                     <% } %>
-               </article>
-               <% }) %>
-         </article>
 
          <article class="scroll-container">
             <% items.forEach(item=> { %>
@@ -179,7 +170,19 @@
             // Calculate how much to scroll (half of the container's width for a smooth experience)
             var scrollAmount = container.clientWidth / 2;
 
-            container.scrollLeft += scrollAmount; // Scroll to the right
+            var scrollLeft = container.scrollLeft;
+            var scrollWidth = container.scrollWidth;
+    
+            scrollLeft += scrollAmount;
+
+            // Als er nog inhoud is om naar rechts te scrollen, schakel dan de 'scroll-to-left' knop in
+            if (scrollLeft < scrollWidth) {    
+               document.getElementById("scroll-to-left").removeAttribute("disabled");
+               console.log("enabled");
+            } 
+            // Scroll naar rechts
+            container.scrollLeft = scrollLeft;
+                  // Scroll to the right
          });
 
          document.getElementById("scroll-to-left").addEventListener("click", function () {
@@ -189,7 +192,18 @@
 
             // Calculate how much to scroll (half of the container's width for a smooth experience)
             var scrollAmount = container.clientWidth / 2;
+            
+            var scrollLeft = container.scrollLeft;
 
-            container.scrollLeft -= scrollAmount; // Scroll to the left
-         });
+            scrollLeft -= scrollAmount;
+
+            // Als we aan het begin van de container zijn, schakel dan de 'scroll-to-left' knop uit
+            if (scrollLeft <= 0) {
+               this.setAttribute("disabled", "disabled");
+               console.log("disabled");
+            }
+
+            // Scroll naar links
+            container.scrollLeft = scrollLeft;
+                     });
       </script>

@@ -1,67 +1,64 @@
-const body = document.querySelector('body'),
-sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
-searchBtn = body.querySelector(".search-box"),
-modeSwitch = body.querySelector(".toggle-switch"),
-modeText = body.querySelector(".mode-text");
+// const body = document.querySelector('body'),
+// sidebar = body.querySelector('nav'),
+// toggle = body.querySelector(".toggle"),
+// searchBtn = body.querySelector(".search-box"),
+// modeSwitch = body.querySelector(".toggle-switch"),
+// modeText = body.querySelector(".mode-text");
 
-toggle.addEventListener("click" , () =>{
-    sidebar.classList.toggle("close");
-})
+// toggle.addEventListener("click" , () =>{
+//     sidebar.classList.toggle("close");
+// })
 
+// searchBtn.addEventListener("click", () =>{
+//     sidebar.classList.remove("close");
+// })
 
-searchBtn.addEventListener("click", () =>{
-    sidebar.classList.remove("close");
-})
+// modeSwitch.addEventListener("click" , () =>{
+//     body.classList.toggle("dark");
 
-modeSwitch.addEventListener("click" , () =>{
-    body.classList.toggle("dark");
+//     if(body.classList.contains("dark")){
+//         modeText.innerText = "Light mode";
+//     }else{
+//         modeText.innerText = "Dark mode";
 
-    if(body.classList.contains("dark")){
-        modeText.innerText = "Light mode";
-    }else{
-        modeText.innerText = "Dark mode";
-
-    }
-})
-
-
+//     }
+// })
 
 
 
 // document.querySelector('form.add-item').addEventListener
 
-function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + ";";
-}
+// function setCookie(name, value, days) {
+//     var expires = "";
+//     if (days) {
+//         var date = new Date();
+//         date.setTime(date.getTime() + (days*24*60*60*1000));
+//         expires = "; expires=" + date.toUTCString();
+//     }
+//     document.cookie = name + "=" + (value || "")  + expires + ";";
+// }
 
 
-function cookieParser(cookieString) {
+// function cookieParser(cookieString) {
  
     // Return an empty object if cookieString
     // is empty
-    if (cookieString === "")
-        return {};
+    // if (cookieString === "")
+    //     return {};
  
     // Get each individual key-value pairs
     // from the cookie string
     // This returns a new array
-    let pairs = cookieString.split(";");
+    // let pairs = cookieString.split(";");
  
     // Separate keys from values in each pair string
     // Returns a new array which looks like
     // [[key1,value1], [key2,value2], ...]
-    let splittedPairs = pairs.map(cookie => cookie.split("="));
+    // let splittedPairs = pairs.map(cookie => cookie.split("="));
  
  
     // Create an object with all key-value pairs
-    const cookieObj = splittedPairs.reduce(function (obj, cookie) {
+    // const cookieObj = splittedPairs.reduce(function (obj, cookie) {
  
         // cookie[0] is the key of cookie
         // cookie[1] is the value of the cookie 
@@ -70,18 +67,18 @@ function cookieParser(cookieString) {
         // characters, e.g. '$'.
         // string.trim() trims the blank spaces 
         // auround the key and value.
-        obj[decodeURIComponent(cookie[0].trim())]
-            = decodeURIComponent(cookie[1].trim());
+//         obj[decodeURIComponent(cookie[0].trim())]
+//             = decodeURIComponent(cookie[1].trim());
  
-        return obj;
-    }, {})
+//         return obj;
+//     }, {})
  
-    return cookieObj;
-}
+//     return cookieObj;
+// }
 
 
 
-let addItemToLeeslijstForm = document.querySelector('form.add-item')
+// let addItemToLeeslijstForm = document.querySelector('form.add-item')
 
 // if (addItemToLeeslijstForm) {
 //     addItemToLeeslijstForm.addEventListener("submit", (event) => {
@@ -109,15 +106,3 @@ let addItemToLeeslijstForm = document.querySelector('form.add-item')
 
 // }
 
-// function test() {
-//     postGift(anotherfunction)
-// }
-
-// function postGift(functie) {
-//     functie.anotherfunction;
-//     console.log('Helloooo there!!!');
-// }
-
-// function anotherfunction() {
-//     console.log('Helloooo there!!!');
-// }

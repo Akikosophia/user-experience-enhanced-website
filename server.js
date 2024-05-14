@@ -82,37 +82,91 @@ app.get('/detail/:id', function (request, response) {
 
 // leeslijst
 
-app.get('/leeslijst', function (request, response) {
-  fetchJson(apiItem).then((items) => {
-    let loadingStatus = "loading";
-    let itemsOpLeeslijst = []
-    // console.log(request.cookies.leeslijst)
-    console.log(request.cookies);
-    items.data.forEach(function (item) {
-      // turn id into string so it corresponds with the cookie ids;
-      const id = `${item.id}`
-      if (request.cookies.leeslijst && request.cookies.leeslijst.includes(id)) {
-        itemsOpLeeslijst.push(item)
-        console.log('gets here')
-      }
-    })
 
-    if (itemsOpLeeslijst.length) {
-      response.render('leeslijst', {
-        items: itemsOpLeeslijst
+
+let leeslijst = {}
+
+
+app.post ('/detail/:id', function(request, response) {
+   const id = request.params.id;
+
+
+   leeslijst[id] = true;
+
+
+   response.redirect(303, '/detail/' + id + '?added=true');
+      
+});
+
+
+app.get('/leeslijst', function(request, response) {
+  let loadingStatus = "loading"; // Indicate that the page is loading
+
+  // Simulate an asynchronous task, such as an API call
+  fetchJson(apiItem)
+  .then((items) => {
+      console.log(items.data);
+
+      let itemsOpLeeslijst = [];
+
+      items.data.forEach(function(item) {
+          if (leeslijst[item.id]) {
+              itemsOpLeeslijst.push(item);
+          }
       });
 
-
-      if (itemsOpLeeslijst.length === 0) {
-        loadingStatus = "empty";
+      // If there are items, render the list
+      if (itemsOpLeeslijst.length) {
+        console.log("there is a book")
+        console.log(loadingStatus);
+          response.render('leeslijst', {
+              items: itemsOpLeeslijst,
+              loadingStatus: loadingStatus
+          });
       } else {
-        loadingStatus = "success";
+          console.log("empty state")
+          // If there are no items, render the empty state
+          response.render('partials/emptyState');
       }
+  })
+  .catch((error) => {
+      console.error("Error fetching items:", error);
+      response.status(500).send("Internal Server Error");
+  });
+});
 
-      response.render('leeslijst', {
-        loadingStatus: loadingStatus,
-        items: itemsOpLeeslijst
-      });
+
+// app.get('/leeslijst', function (request, response) {
+//   fetchJson(apiItem).then((items) => {
+//     let loadingStatus = "loading";
+//     let itemsOpLeeslijst = []
+    // console.log(request.cookies.leeslijst)
+    // console.log(request.cookies);
+    // items.data.forEach(function (item) {
+      // turn id into string so it corresponds with the cookie ids;
+    //   const id = `${item.id}`
+    //   if (request.cookies.leeslijst && request.cookies.leeslijst.includes(id)) {
+    //     itemsOpLeeslijst.push(item)
+    //     console.log('gets here')
+    //   }
+    // })
+
+    // if (itemsOpLeeslijst.length) {
+    //   response.render('leeslijst', {
+    //     items: itemsOpLeeslijst
+    //   });
+
+
+      // if (itemsOpLeeslijst.length === 0) {
+      //   loadingStatus = "empty";
+      // } else {
+      //   loadingStatus = "success";
+      // }
+
+    //   response.render('leeslijst', {
+    //     loadingStatus: loadingStatus,
+    //     items: itemsOpLeeslijst
+    //   });
 
 
       //   if (itemsOpLeeslijst.length === 0) {
@@ -125,30 +179,31 @@ app.get('/leeslijst', function (request, response) {
       //     });
       // }
 
-    } else {
-      response.render('leeslijst', {
-        loadingStatus: loadingStatus,
-        items: []
-      });
+    // } else {
+    //   response.render('leeslijst', {
+    //     loadingStatus: loadingStatus,
+    //     items: []
+    //   });
       // console.error("Invalid or unexpected API response format");
       // response.status(500).send("Internal Server Error");
-    }
-  });
-});
+//     }
+//   });
+// });
 
 
-let leeslijst = []
+// let leeslijst = []
 
-app.post('/detail/:id', function (request, response) {
-  request.cookies.leeslijst = JSON.parse(request.cookies.leeslijst)
+// app.post('/detail/:id', function (request, response) {
+//   request.cookies.leeslijst = JSON.parse(request.cookies.leeslijst)
   
-  if (request.cookies.leeslijst) {
-    leeslijst = request.cookies.leeslijst
-  } 
-  fetchJson(apiItem + '?filter={"id":' + request.params.id + '}').then((items) => {
-    const book =  items.data[0]
+//   if (request.cookies.leeslijst) {
+//     leeslijst = request.cookies.leeslijst
+//     console.log(leeslijst)
+//   } 
+//   fetchJson(apiItem + '?filter={"id":' + request.params.id + '}').then((items) => {
+//     const book =  items.data[0]
     // console.log(book)
-    leeslijst.push(request.params.id)
+    // leeslijst.push(request.params.id)
     // Jammerdepammer:
     // leeslijst[id] = {
     //   id: book.id,
@@ -156,15 +211,15 @@ app.post('/detail/:id', function (request, response) {
     //   afbeelding: book.afbeelding,
     // };
     // Save leeslijst in cookie called 'leeslijst'
-    console.log('lijst:' + leeslijst);
-    response.cookie('leeslijst', leeslijst, { maxAge: 900000, httpOnly: false });
-    response.redirect(303, '/detail/' + request.params.id + '?added=true');
-  })
+  //   console.log('lijst:' + leeslijst);
+  //   response.cookie('leeslijst', leeslijst, { maxAge: 900000, httpOnly: false });
+  //   response.redirect(303, '/detail/' + request.params.id + '?added=true');
+  // })
 
 
   // send succes state // 
 
-});
+// });
 
 
 // favorieten

@@ -151,6 +151,18 @@ h2.books {
     margin-top: 5em;
 }
 
+.st0 {
+    display: none
+ }
+
+ .st1 {
+    display: inline
+ }
+
+ .st2 {
+    fill: #0a0a0a
+ }
+
 .next {
     background-color: transparent;
     float: right;
@@ -163,7 +175,7 @@ h2.books {
 .next svg {
     height: 48px;
     width: 48px;
-    fill: #0a0a0a; /* Set fill color */
+    fill: red; /* Set fill color */
 }
 
 .prev {
@@ -174,10 +186,16 @@ h2.books {
     box-sizing: border-box; 
 }
 
+/* Stel de standaard grootte van de SVG in */
 .prev svg {
     height: 48px;
     width: 48px;
-    fill: #0a0a0a; /* Set fill color */
+    fill: #0a0a0a; /* Standaard vulkleur */
+}
+
+/* Stel de vulkleur in voor het pad binnen de uitgeschakelde SVG */
+.prev svg :disabled path {
+    fill: red;
 }
 
 .triangle-right {
@@ -217,15 +235,19 @@ h2.books {
     transform: translate(-50%, -50%);
     width: 50px;
     height: 50px;
-    background-color: transparent;
+    border: none; /* Rand verwijderen */
+    background: none; /* Achtergrond verwijderen */
+    cursor: pointer; 
 }
    
 .bookmark input {
     display: none;
 }
 
+
+
 /* .stars label:before {
-    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="%2366E5BF" d="M32 12.408l-11.056-1.607-4.944-10.018-4.944 10.018-11.056 1.607 8 7.798-1.889 11.011 9.889-5.199 9.889 5.199-1.889-11.011 8-7.798zM16 23.547l-6.983 3.671 1.334-7.776-5.65-5.507 7.808-1.134 3.492-7.075 3.492 7.075 7.807 1.134-5.65 5.507 1.334 7.776-6.983-3.671z"></path></svg>');
+    content: url`('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="%2366E5BF" d="M32 12.408l-11.056-1.607-4.944-10.018-4.944 10.018-11.056 1.607 8 7.798-1.889 11.011 9.889-5.199 9.889 5.199-1.889-11.011 8-7.798zM16 23.547l-6.983 3.671 1.334-7.776-5.65-5.507 7.808-1.134 3.492-7.075 3.492 7.075 7.807 1.134-5.65 5.507 1.334 7.776-6.983-3.671z"></path></svg>');
 }
 
 .stars input:checked ~ label {
@@ -279,27 +301,13 @@ img.items-afbeeldingen {
     object-fit: contain;
     border-radius: 10px;
     height: 15em;
+    transition: 2s;
     /* margin-left: -12.2em; */
 }
 
 img.items-afbeeldingen:hover { 
-    cursor: pointer; 
-    transform: scale(1);
-    transition: 2s ease-in-out;
-    
+    cursor: pointer;    
 }
-/* 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.bookmark {
-    width: 50px;
-    height: 50px;
-    color: var(--text-color);
-} */
-
 
 /* =====  Oba logo & Zoekbalk ===== */
 
@@ -402,6 +410,12 @@ CSS voor de lege staat
 
 /* ===== Detail pagina ===== */
 
+h3.titel-auteur,
+h2.item-titel {
+    text-align: left;
+    margin-top: 1em;
+}
+
 a.back {
     text-decoration: none;
 }
@@ -432,7 +446,7 @@ button {
 }
 
 button.leeslijst-button{
-    width: 155px;
+    width: 150px;
     /* padding: .3em .6em; */
     border: 1px solid transparent;
     border-radius: .5rem;
@@ -452,7 +466,7 @@ button.reserveer-button {
     /* position: absolute;
     left: 110px;  */
     /* padding: .3em .6em; */
-    width: 155px;
+    width: 150px;
     border: 1px solid transparent;
     border-radius: .5rem;
     font-family: inherit;
@@ -475,7 +489,9 @@ button.reserveer-button:hover ,button.leeslijst-button:hover {
 }
 
 button.reserveer-button:focus ,button.leeslijst-button:focus {
-    background-color: var(--primary-color);
+    outline: 2px solid var(--text-color-body);
+	outline-offset: 3px;
+
 }
 
 button a {
@@ -491,7 +507,6 @@ button a {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 a.item-detail {
@@ -499,23 +514,42 @@ a.item-detail {
     margin-bottom: 2em;
     text-decoration: none;
     color: var(--text-color-body);
-    text-align: center;
+    text-align: left;
 }
 
 h3.samenvatting {
     margin-top: 1em;
     text-align: left;
     margin-right: 1em;
+    margin-bottom: 0.5em;
 }
 
 p.item-samenvatting {
     margin-left: 7.5em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     text-align: left;
     margin-right: 1em;
 }
 
+/* .box-samenvatting {
+    margin-top: 0.5em;
+    width: 150px;
+    height: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
+
+
+.text-box {
+margin-top: 0.5em;
+width: 100px;
+height: 200px;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: wrap;
+margin-right: 3.5em; 
+} */
 
 /* ===== Sidebar ===== */
 
@@ -871,36 +905,25 @@ body.dark .home .text {
     @media (min-width:425px) {
     
 
+        /* article.detail-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        } */
+
         /* article .profielen {
             margin-left: 6.5em; 
         } */
 
-        article.flex-container{
-            display: grid;
-            justify-content: flex-start;
-            grid-template-columns: 1fr 1fr ;
-            grid-template-rows: 1fr  1fr ;
 
-        }
-        
-        article .container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            
-
-        }
-
-         article .section {
-           display: flex;
-           flex-direction: column;
-         }
+  
+ 
 
     }
         
 
 
-    @media (min-width:600px) {
+    @media (min-width:650px) {
          
            /* .profielen-container {
             display: grid;
@@ -915,9 +938,34 @@ body.dark .home .text {
 
             margin-right: -4em;
         } */
-           }
+        
+        
 
-    
+           article.detail-container{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+         } 
+ 
+         article.container  {
+             display: flex;
+             flex-wrap: wrap;
+             gap: 10px;
+             align-items: center;
+
+         }
+         
+         article.formulier {
+             display: flex;
+             flex-direction: row;
+             flex-wrap: wrap;
+ 
+         }
+ 
+
+        }
 
     @media (min-width:768px) {
 /* 
@@ -938,7 +986,7 @@ body.dark .home .text {
                 grid-column-gap: 0;
                 grid-row-gap: 0;
                } */
-
+             
 
           
 
