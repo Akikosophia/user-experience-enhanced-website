@@ -3,56 +3,73 @@
   <main>
 
 
-      <a href="/" class="back"> terug </a>
+    <a href="/" class="back"> terug </a>
 
-      <article class="detail">
+    <article class="detail">
 
-        <% items.forEach(item=> { %>
-          <article class="details">
-            <a href="./detail/<%= item.id %>" class="item-detail">
-              <% if (item.afbeelding) { %>
-                <h2 class="item-titel">
-                  <%= item.title %>
-                </h2>
-                <h3 class="titel-auteur"> <%= item.auteur %></h3>
-            </a>
+      <% items.forEach(item=> { %>
+        <article class="details">
+          <a href="./detail/<%= item.id %>" class="item-detail">
+            <% if (item.afbeelding) { %>
+              <h2 class="item-titel">
+                <%= item.title %>
+              </h2>
+              <h3 class="titel-auteur">
+                <%= item.auteur %>
+              </h3>
+          </a>
 
-            <article class="detail-container">
+          <article class="detail-container">
 
             <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
             <% } %>
 
-            <article class="container">
+              <article class="container">
 
-            <article class="section">
-              <h3 class="samenvatting">Samenvatting</h3>
-              <div class="box-samenvatting"><p class="item-samenvatting"><%- item.description %></p></div>
-            </article>
+                <article class="section">
+                  <h3 class="samenvatting">Samenvatting</h3>
+                  <div class="box-samenvatting">
+                    <p class="item-samenvatting"><%- item.description %></p>
+                  </div>
+                </article>
+
+                <article class="formulier">
+                  <form method="post" action="/detail/<%= item.id %>" class="add-item">
+                    <input type="hidden" name="savedItem" value="<%= item.id %>">
+                    <button class="leeslijst-button" type="submit">voeg toe aan leeslijst</button>
+                  </form>
+
+                  <form method="POST" action="/detail/<%= item.id %>" class="reserveer-item">
+                    <input type="hidden" name="id" value="<%= item.id %>">
+                    <button class="reserveer-button" type="submit">reserveer</button>
+                  </form>
+
+                  <form method="POST" action="/detail/<%= item.id %>" class="favo-item">
+                    <input type="hidden" name="id" value="<%= item.id %>">
+                    <label><button class="bookmark-detail" type="submit"> <button class="bookmark-detail">
+                          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <!-- remember to append title with state change  -->
+                            <title>Bookmark Icon [Active]</title>
+                            <path id="bookmark" d="M4 0h32v40L20 28 4 40V0z" stroke="currentColor" stroke-width="0"
+                              clip-path="url(#clip)" />
+                            <clipPath id="clip">
+                              <use xlink:href="#bookmark" />
+                            </clipPath>
+                          </svg></label>
+                    </button>
+                  </form>
+
+                </article>
+
+              </article>
+
+              <!-- <button class="like-button">❤️</button> -->
+              <% }) %>
 
 
-
-        <article class="formulier">
-          <form method="POST" action="/detail/<%= item.id %>" class="add-item">
-            <input type="hidden" name="id" value="<%= item.id %>">
-            <button class="leeslijst-button" type="submit">voeg toe aan leeslijst</button>
-          </form>
-         
-          <form method="POST" action="/detail/<%= item.id %>" class="reserveer-item">
-            <input type="hidden" name="id" value="<%= item.id %>">
-            <button class="reserveer-button" type="submit">reserveer</button>
-          </form>
 
           </article>
- 
-        </article>
-
-          <!-- <button class="like-button">❤️</button> -->
-          <% }) %>
-
-
-
-      </article>
-      <!-- popup dialog-->
+          <!-- popup dialog-->
 
   </main>
 

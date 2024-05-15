@@ -44,26 +44,29 @@
                      </a>
                   </div>
                   <div class="bookmark">
-                     <form method="POST" action="">
-                        <input type="submit" value="submit">
-                        <label>
-                           <button class="bookmark" >
-                              <svg viewBox="0 0 36 36">
-                                 <path class="filled"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="default"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="corner"
-                                    d="M10 6C10 6 14.8758 6 18 6C21.1242 6 26 6 26 6C26 6 26 6 26 6H10C10 6 10 6 10 6Z" />
-                              </svg>
-                           </button>
-                        </label>
-                     </form>
+                     <form method="post" action="/detail/<%= item.id %>" class="add-item">
+                        <input type="hidden" name="savedItem" value="<%= item.id %>">
+                           <label><button class="bookmark" type="submit">  <button class="bookmark">
+                              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                                <!-- remember to append title with state change  -->
+                                <title>Bookmark Icon [Active]</title>
+                                <path id="bookmark" d="M4 0h32v40L20 28 4 40V0z" 
+                                      stroke="currentColor" 
+                                      stroke-width="0" 
+                                      clip-path="url(#clip)" />
+                                <clipPath id="clip"><use xlink:href="#bookmark"/></clipPath>
+                              </svg></label>
+                            </button>
+                          
+                             
+                            </button>
+                      </form>
+
                   </div>
                   <% if (item.afbeelding) { %>
                      <picture>
-                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
-                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>?format=avif" type="image/avif">
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>?format=webp" type="image/webp">
                         <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>"
                            width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>"
                            class="items-afbeeldingen" alt="">
@@ -88,24 +91,22 @@
                   <div class="bookmark">
                      <form method="POST" action="">
                         <input type="submit" value="submit">
-                        <label>
-                           <button class="bookmark">
-                              <svg viewBox="0 0 36 36">
-                                 <path class="filled"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="default"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="corner"
-                                    d="M10 6C10 6 14.8758 6 18 6C21.1242 6 26 6 26 6C26 6 26 6 26 6H10C10 6 10 6 10 6Z" />
-                              </svg>
-                           </button>
-                        </label>
+                        <label><button class="bookmark" type="submit">  <button class="bookmark">
+                           <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                             <!-- remember to append title with state change  -->
+                             <title>Bookmark Icon [Active]</title>
+                             <path id="bookmark" d="M4 0h32v40L20 28 4 40V0z" 
+                                   stroke="currentColor" 
+                                   stroke-width="0" 
+                                   clip-path="url(#clip)" />
+                             <clipPath id="clip"><use xlink:href="#bookmark"/></clipPath>
+                           </svg></label>
                      </form>
                   </div>
                   <% if (item.afbeelding) { %>
                      <picture>
-                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
-               <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>?format=avif" type="image/avif">
+               <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>?format=webp" type="image/webp">
                         <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>" loading="lazy"
                            width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>"
                            class="items-afbeeldingen" alt="">
@@ -130,24 +131,23 @@
                   <div class="bookmark">
                      <form method="POST" action="">
                         <input type="submit" value="submit">
-                        <label>
-                           <button class="bookmark">
-                              <svg viewBox="0 0 36 36">
-                                 <path class="filled"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="default"
-                                    d="M26 6H10V18V30C10 30 17.9746 23.5 18 23.5C18.0254 23.5 26 30 26 30V18V6Z" />
-                                 <path class="corner"
-                                    d="M10 6C10 6 14.8758 6 18 6C21.1242 6 26 6 26 6C26 6 26 6 26 6H10C10 6 10 6 10 6Z" />
-                              </svg>
-                           </button>
-                        </label>
+                        <label><button class="bookmark" type="submit">  <button class="bookmark">
+                           <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                             <!-- remember to append title with state change  -->
+                             <title>Bookmark Icon [Active]</title>
+                             <path id="bookmark" d="M4 0h32v40L20 28 4 40V0z" 
+                                   stroke="currentColor" 
+                                   stroke-width="0" 
+                                   clip-path="url(#clip)" />
+                             <clipPath id="clip"><use xlink:href="#bookmark"/></clipPath>
+                           </svg></label>
                      </form>
                   </div>
+
                   <% if (item.afbeelding) { %>
                      <picture>
-                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=avif" type="image/avif">
-               <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>?format=webp" type="image/webp">
+                        <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>?format=avif" type="image/avif">
+               <source srcset="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>?format=webp" type="image/webp">
                         <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding.id %>" loading="lazy"
                            width="<%= item.afbeelding.width %>" height="<%= item.afbeelding.height %>"
                            class="items-afbeeldingen" alt="">

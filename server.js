@@ -5,7 +5,7 @@
 // Importeer het npm pakket express uit de node_modules map
 import express, { application, json } from 'express'
 
-import cookieParser from 'cookie-parser'
+
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
 import fetchJson from './helpers/fetch-json.js'
 
@@ -26,7 +26,6 @@ app.set('views', './views')
 
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
 app.use(express.static('public'))
-app.use(cookieParser())
 
 app.use(express.urlencoded({ extended: true }))
 
@@ -70,25 +69,54 @@ app.get('/detail/:id', function (request, response) {
   })
 })
 
-app.post('/detail/:id', function (request, response) {
-  const id = request.params.id
+// app.post('/detail/:id', function (request, response) {
+//   const id = request.params.id;
 
-  console.log(request.params.id)
+//   console.log(request.params.id)
 
-  // posten naar directus..
-  fetch(`${apiUrl}oba_bookmarks/`, {
-    method: 'POST',
-    body: JSON.stringify({
-      item: request.params.id,
-    }),
-    headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-  }).then((postResponse) => {
-    console.log(postResponse)
-    response.redirect(303, '/detail/' + id + '?added=true')
+//   // posten naar directus..
+//   fetch(`${apiUrl}oba_bookmarks/`, {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       item: request.params.id,
+//     }),
+//     headers: {
+//       'Content-Type': 'application/json; charset=UTF-8',
+//     },
+//   }).then((postResponse) => {
+//     if (request.body.enhanced){
+//       response.render('detail', {added:true});
+//     } else{
+//     console.log(postResponse)
+//     response.redirect(303, '/detail/' + id + '?added=true')
+//     }
+//   })
+// });
+
+
+app.post('/detail/:id', function(request, response){
+ 
+  const id = request.params.id;
+ 
+  fetch(`${apiUrl}/oba_bookmarks/` , {
+      method: 'POST',
+      body: JSON.stringify({
+        item: request.params.id,
+      }),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    }).then((postResponse) => {
+      // Redirect naar de persoon pagina
+      if (request.body.enhanced) {
+          response.render('detail', {added:true});
+        } else {
+        response.redirect(303, '/detail/' + id + '?added=true')
+    }
   })
-})
+});
+
+
 
 app.get('/leeslijst', function (request, response) {
   let loadingStatus = 'loading' // Indicate that the page is loading

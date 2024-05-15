@@ -26,83 +26,46 @@
 
 
 
-// document.querySelector('form.add-item').addEventListener
+let lijstForm = document.querySelector('.add-item');
 
-// function setCookie(name, value, days) {
-//     var expires = "";
-//     if (days) {
-//         var date = new Date();
-//         date.setTime(date.getTime() + (days*24*60*60*1000));
-//         expires = "; expires=" + date.toUTCString();
-//     }
-//     document.cookie = name + "=" + (value || "")  + expires + ";";
-// }
+lijstForm.addEventListener('submit', function(event){
+    let savedItem = new FormData(this)
 
 
-// function cookieParser(cookieString) {
- 
-    // Return an empty object if cookieString
-    // is empty
-    // if (cookieString === "")
-    //     return {};
- 
-    // Get each individual key-value pairs
-    // from the cookie string
-    // This returns a new array
-    // let pairs = cookieString.split(";");
- 
-    // Separate keys from values in each pair string
-    // Returns a new array which looks like
-    // [[key1,value1], [key2,value2], ...]
-    // let splittedPairs = pairs.map(cookie => cookie.split("="));
- 
- 
-    // Create an object with all key-value pairs
-    // const cookieObj = splittedPairs.reduce(function (obj, cookie) {
- 
-        // cookie[0] is the key of cookie
-        // cookie[1] is the value of the cookie 
-        // decodeURIComponent() decodes the cookie 
-        // string, to handle cookies with special
-        // characters, e.g. '$'.
-        // string.trim() trims the blank spaces 
-        // auround the key and value.
-//         obj[decodeURIComponent(cookie[0].trim())]
-//             = decodeURIComponent(cookie[1].trim());
- 
-//         return obj;
-//     }, {})
- 
-//     return cookieObj;
-// }
+let leeslijstButton  = document.querySelector('.leeslijst-button');
+leeslijstButton.addEventListener('click', function(event){
+
+}).then(function(response) {
+    // Als de server een antwoord geeft, krijgen we een stream terug
+    // We willen hiervan de text gebruiken, wat in dit geval HTML teruggeeft
+    return response.text('toegevoegd')
+
+}).then(function(responseHTML) {
+    // En de HTML kunnen we gebruiken om onze DOM aan te passen
+    document.querySelector('.leeslijst-button').innerHTML = responseHTML
+
+
+savedItem.append('enhanced', true)
+
+fetch(this.action, {
+    method: this.method,
+   
+    body: new URLSearchParams(savedItem)
+}).then()
+// Haal de URL op van de huidige pagina
+// Controleer of de URL het "added=true" query parameter bevat
 
 
 
-// let addItemToLeeslijstForm = document.querySelector('form.add-item')
+    // SVG-icoon aanpassen
+    notification.classList.add("notification")
+    notificationIcon.classList.add("notification")
+    const svgIcon = document.querySelector(".bi-bookmark-fill");
 
-// if (addItemToLeeslijstForm) {
-//     addItemToLeeslijstForm.addEventListener("submit", (event) => {
-//         // prevent refresh which is default behavior on a form submit
-//         event.preventDefault();
-//         // // document.cookie = 
-//         const id = addItemToLeeslijstForm.querySelector('input[name="id"]').value
-        
-//         const allCookies = cookieParser(document.cookie)
-//         if (allCookies && allCookies.leeslijst) {
-//             const parsedCookie = JSON.parse(allCookies.leeslijst.replace('j:', ''));
-//             console.log(parsedCookie);
-//             if (!parsedCookie.includes(id)) {
-//                 parsedCookie.push(id)
-//                 setCookie('leeslijst', JSON.stringify(parsedCookie), 10)
-//             } else {
-//                 console.log('exists!')
-//             }
+    // Verander de fill kleur naar currentColor (wit in dit geval)
+    svgIcon.setAttribute("fill", "currentColor");
+   
 
-//         } else {
-//             setCookie('leeslijst', JSON.stringify([id]), 10)
-//         }
-//         // dialog.showModal();
-//     });
-
-// }
-
+event.preventDefault()
+})
+});
