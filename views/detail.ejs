@@ -10,8 +10,7 @@
       <% items.forEach(item=> { %>
         <article class="details">
           <a href="./detail/<%= item.id %>" class="item-detail">
-            <% if (item.afbeelding) { %>
-              <h2 class="item-titel">
+             <h2 class="item-titel">
                 <%= item.title %>
               </h2>
               <h3 class="titel-auteur">
@@ -20,8 +19,8 @@
           </a>
 
           <article class="detail-container">
-
-            <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
+            <% if (item.afbeelding) { %>
+              <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
             <% } %>
 
               <article class="container">
@@ -34,10 +33,13 @@
                 </article>
 
                 <article class="formulier">
+                  <% if (!opLeeslijst) { %>
                   <form method="post" action="/detail/<%= item.id %>" class="add-item">
-                    <input type="hidden" name="savedItem" value="<%= item.id %>">
                     <button class="leeslijst-button" type="submit">voeg toe aan leeslijst</button>
                   </form>
+                    <% } else { %>
+                  <p>Dit item is al toegevoegd aan je leeslijst.</p>
+                    <% } %>
 
                   <form method="POST" action="/detail/<%= item.id %>" class="reserveer-item">
                     <input type="hidden" name="id" value="<%= item.id %>">

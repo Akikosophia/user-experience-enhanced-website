@@ -30,33 +30,36 @@ let lijstForm = document.querySelector('.add-item');
 
 lijstForm.addEventListener('submit', function(event){
     let savedItem = new FormData(this)
+    savedItem.append('enhanced', true)
+fetch(this.action, {
+    method: this.method,
+   
+    body: new URLSearchParams(savedItem)
+}).then(function(result){
+// Haal de URL op van de huidige pagina
+// Controleer of de URL het "added=true" query parameter bevat
 
 
 let leeslijstButton  = document.querySelector('.leeslijst-button');
 leeslijstButton.addEventListener('click', function(event){
+    
+})
 
 }).then(function(response) {
     // Als de server een antwoord geeft, krijgen we een stream terug
     // We willen hiervan de text gebruiken, wat in dit geval HTML teruggeeft
-    return response.text('toegevoegd')
+    return response.text('toegevoegd');
 
 }).then(function(responseHTML) {
     // En de HTML kunnen we gebruiken om onze DOM aan te passen
     document.querySelector('.leeslijst-button').innerHTML = responseHTML
 
 
-savedItem.append('enhanced', true)
-
-fetch(this.action, {
-    method: this.method,
-   
-    body: new URLSearchParams(savedItem)
-}).then()
-// Haal de URL op van de huidige pagina
-// Controleer of de URL het "added=true" query parameter bevat
 
 
 
+
+    console.log('saved item');
     // SVG-icoon aanpassen
     notification.classList.add("notification")
     notificationIcon.classList.add("notification")

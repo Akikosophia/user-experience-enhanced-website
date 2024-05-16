@@ -290,6 +290,7 @@ a.titel-items {
     margin: 0 auto;
     padding-top: 4em;
     padding-bottom: 3em;
+    transition: 2s;
 }
 
 picture , img.items-afbeeldingen {
@@ -300,8 +301,12 @@ picture , img.items-afbeeldingen {
     /* margin-left: -12.2em; */
 }
 
-img.items-afbeeldingen:hover { 
+picture img.items-afbeeldingen:hover { 
     cursor: pointer;    
+}
+
+.scroll-items:hover {
+  width: 200px;
 }
 
 /* =====  Oba logo & Zoekbalk ===== */
@@ -479,7 +484,7 @@ button.reserveer-button:hover ,button.leeslijst-button:hover {
 button.reserveer-button:focus ,button.leeslijst-button:focus {
     background-color: var(--btn-succes);
     outline: 2px solid white;
-    border: 2px solid white;
+    border: 2px solid var(--btn-succes);
 }
 
 

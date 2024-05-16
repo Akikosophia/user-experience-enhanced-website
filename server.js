@@ -63,8 +63,21 @@ app.get('/home', async function (request, response) {
 // detail
 app.get('/detail/:id', function (request, response) {
   fetchJson(apiItem + '?filter={"id":' + request.params.id + '}').then((items) => {
-    response.render('detail', {
-      items: items.data /*hier zeg ik dat iedereen getoond moet worden*/,
+      // bookmarks ophalen...
+  let leeslijstFetch = `${apiUrl}oba_bookmarks?fields=*.*`
+
+  // Simulate an asynchronous task, such as an API call
+  fetchJson(leeslijstFetch)
+    .then(({ data }) => {
+      return data.map((bookmark) => {
+        return bookmark.item.id
+      })
+    })
+    .then((itemsOpLeeslijst) => {
+      response.render('detail', {
+        items: items.data,
+        opLeeslijst: itemsOpLeeslijst.includes(Number(request.params.id)),
+      })
     })
   })
 })
@@ -111,7 +124,7 @@ app.post('/detail/:id', function(request, response){
       if (request.body.enhanced) {
           response.render('detail', {added:true});
         } else {
-        response.redirect(303, '/detail/' + id + '?added=true')
+        response.redirect(303, '/detail/' + id)
     }
   })
 });
@@ -135,6 +148,7 @@ app.get('/leeslijst', function (request, response) {
       if (itemsOpLeeslijst.length) {
         // console.log('there is a book')
         // console.log(loadingStatus)
+        // TODO: ooit wil ik hier alleen unieke items :)
         response.render('leeslijst', {
           items: itemsOpLeeslijst,
           loadingStatus: loadingStatus,
