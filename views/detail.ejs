@@ -18,27 +18,30 @@
               </h3>
           </a>
 
+
           <article class="detail-container">
             <% if (item.afbeelding) { %>
               <img src="https://fdnd-agency.directus.app/assets/<%= item.afbeelding %>" class="item-afbeelding" alt="">
             <% } %>
 
+          </article>
+
               <article class="container">
 
                 <article class="section">
                   <h3 class="samenvatting">Samenvatting</h3>
-                  <div class="box-samenvatting">
-                    <p class="item-samenvatting"><%- item.description %></p>
-                  </div>
+                    <div class="item-samenvatting"><%- item.description %></div>
                 </article>
 
                 <article class="formulier">
                   <% if (!opLeeslijst) { %>
+                   
+
                   <form method="post" action="/detail/<%= item.id %>" class="add-item">
                     <button class="leeslijst-button" type="submit">voeg toe aan leeslijst</button>
                   </form>
                     <% } else { %>
-                  <p>Dit item is al toegevoegd aan je leeslijst.</p>
+                  <button class="toegevoegd">Toegevoegd aan de leeslijst</button>
                     <% } %>
 
                   <form method="POST" action="/detail/<%= item.id %>" class="reserveer-item">
@@ -48,16 +51,14 @@
 
                   <form method="POST" action="/detail/<%= item.id %>" class="favo-item">
                     <input type="hidden" name="id" value="<%= item.id %>">
-                    <label><button class="bookmark-detail" type="submit"> <button class="bookmark-detail">
-                          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <!-- remember to append title with state change  -->
-                            <title>Bookmark Icon [Active]</title>
-                            <path id="bookmark" d="M4 0h32v40L20 28 4 40V0z" stroke="currentColor" stroke-width="0"
-                              clip-path="url(#clip)" />
-                            <clipPath id="clip">
-                              <use xlink:href="#bookmark" />
-                            </clipPath>
-                          </svg></label>
+                      <button class="bookmark-detail" type="submit"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <title>Bookmark Icon [Active]</title>
+                        <path id="bookmark" d="M4 0h32v40L20 28 4 40V0z" stroke="currentColor" stroke-width="0"
+                          clip-path="url(#clip)" />
+                        <clipPath id="clip">
+                          <use xlink:href="#bookmark" />
+                        </clipPath>
+                      </svg>
                     </button>
                   </form>
 
@@ -65,13 +66,12 @@
 
               </article>
 
-              <!-- <button class="like-button">❤️</button> -->
-              <% }) %>
+    
+            </article>    <% }) %>
+         
 
-
-
-          </article>
-          <!-- popup dialog-->
+     
+          
 
   </main>
 

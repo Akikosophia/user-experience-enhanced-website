@@ -85,7 +85,7 @@ h1.welkom-tekst {
  .profielen-container {
     display: flex;
     flex-wrap: wrap;
-    /* margin-left: 6em; */
+    margin: 0 10px 10px 0;
     margin-left: 6em;
     margin-top: 3em;
     border-radius: 10px;
@@ -139,7 +139,7 @@ a {
 /* ------ */
 
 h1.titel-favorieten {
-    margin-left: 3em;
+    margin-left: 3.5em;
     margin-top: 5em;
 }
 
@@ -173,7 +173,7 @@ h2.books {
 .next svg {
     height: 48px;
     width: 48px;
-    fill: red; /* Set fill color */
+    fill: var(--primary-color); /* Set fill color */
 }
 
 .prev {
@@ -199,7 +199,7 @@ h2.books {
 .triangle-right {
     border-top:
     18px solid transparent;
-  border-bottom:
+    border-bottom:
     18px solid transparent;
     width: 0;
     height: 0;
@@ -237,7 +237,7 @@ h2.books {
     height: 35px;
     position: absolute;
     top: 67%;
-    left: 73%;
+    left: 70%;
     transform: translate(-50%, -50%);
     cursor: pointer; 
     background-color: none;
@@ -259,7 +259,7 @@ a.titel-items {
 
 .scroll-container {
     display: flex;
-    width: 104em;
+    width: 106em;
     margin: auto;
     border-radius: 20px;
     border: none;
@@ -267,14 +267,14 @@ a.titel-items {
     overflow-y: hidden;
     white-space: nowrap;
     scroll-snap-type: x mandatory;
-    margin-left: 6em;
+    margin-left: 7em;
     margin-top: 1.5em;
     margin-bottom: 1em;
 }
 
 .scroll-items {
     /* flex: auto; */
-    width: 200px; 
+    width: 240px; 
     scroll-snap-align: start;
     background-color: var(--sidebar-color); 
     display: flex;
@@ -290,24 +290,23 @@ a.titel-items {
     margin: 0 auto;
     padding-top: 4em;
     padding-bottom: 3em;
-    transition: 2s;
+   
 }
 
-picture , img.items-afbeeldingen {
+img.items-afbeeldingen {
     object-fit: contain;
-    border-radius: 10px;
     height: 15em;
-    transition: 2s;
-    /* margin-left: -12.2em; */
+    width: 220px;
 }
 
-picture img.items-afbeeldingen:hover { 
-    cursor: pointer;    
+/* article.scroll-items {
+    transition: 0.5s ease-in-out;  
 }
 
-.scroll-items:hover {
-  width: 200px;
-}
+article.scroll-items:hover {
+    transform: scale(1.2);
+} */
+
 
 /* =====  Oba logo & Zoekbalk ===== */
 
@@ -317,7 +316,13 @@ picture img.items-afbeeldingen:hover {
     margin-top: 1em;  
     margin-bottom: 3em; 
     width: 3.5em;
+    transition: 0.5s ease-in-out;  
 }
+
+.oba-logo:hover { 
+    transform: scale(1.2);
+}
+
 
 .zoek-balk {
     padding: 20px;
@@ -352,40 +357,48 @@ picture img.items-afbeeldingen:hover {
 
 /* ===== Scroll bar leeslijst  ===== */
 
+h1.favorieten {
+    margin-left: 3.5em;
+    margin-top: 3em;
+}
+
+h3.leeslijst-titel {
+   font-size: 1em;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: wrap;
+   font-weight: lighter;
+}
+
 .scroll-lijst {
     display: flex;
-    width: 55em;
-    margin: auto;
-    border-radius: 5px;
-    border: none;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    scroll-snap-type: x mandatory;
+    flex-wrap: wrap;
     margin-left: 7em;
     margin-top: 5em;
 }
 
-.lees-lijst {
-    flex: 0 auto;
-    scroll-snap-align: start;
+.leeslijst {
     background-color: var(--sidebar-color); 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 20em;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 img.item-afbeelding {
     object-fit: contain;
-    border-radius: 10px;
     height: 15em;
- 
+    /* width: 220px; */
 }
 
 .leeslijst li  {
     list-style: none;
+    font-size: 1em;
+    width: 200px;
+    background-color: white;
+    margin-top:3em;
 }
 
 
@@ -414,12 +427,10 @@ CSS voor de lege staat
 h3.titel-auteur,
 h2.item-titel {
     text-align: left;
-    margin-top: 1em;
+    margin-top: 0.5em;
+    margin-right: 1em;
 }
 
-a.back {
-    text-decoration: none;
-}
 
 .back {
     margin-top: 4em ;
@@ -453,7 +464,8 @@ button.leeslijst-button{
     border-radius: .5rem;
     font-family: inherit;
     font-size: inherit;
-    background: var(--sidebar-color);
+    background-color: var(--primary-color);
+    color:var(--body-color);
     cursor: pointer; 
     display: flex;
     flex-direction: column;
@@ -469,19 +481,25 @@ button.reserveer-button {
     border-radius: .5rem;
     font-family: inherit;
     font-size: inherit;
-    background: var(--sidebar-color);
+    background-color: var(--primary-color);
+    color:var(--body-color);
     cursor: pointer; 
     margin-bottom: 0.5em;
     margin-left: 0;
 }
 
-
 button.reserveer-button:hover ,button.leeslijst-button:hover {
-    background-color: var(--primary-color);
+    background-color: #bc0f1b; 
     color:var(--body-color);
 }
 
-button.reserveer-button:focus ,button.leeslijst-button:focus {
+button.reserveer-button:focus ,button.leeslijst-button:focus, button.toegevoegd:focus {
+    background-color: var(--btn-succes);
+    outline: 2px solid white;
+    border: 2px solid var(--btn-succes);
+}
+
+button.reserveer-button:active ,button.leeslijst-button:active, button.toegevoegd:active {
     background-color: var(--btn-succes);
     outline: 2px solid white;
     border: 2px solid var(--btn-succes);
@@ -490,23 +508,31 @@ button.reserveer-button:focus ,button.leeslijst-button:focus {
 
   /* // .bookmark detail pagina */
 
-button.bookmark-detail {
-    margin-top:0.5em;
-    margin-bottom: 2em;
+button.toegevoegd {
+    width: 150px;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: var(--primary-color);
+    color:var(--body-color);
+    cursor: pointer;  
+    margin-left: 0;
+}
 
+button.toegevoegd:hover {
+    background-color: #bc0f1b; 
+    color:var(--body-color);
 }
 
   .bookmark-detail {
     color: var(--primary-color); /* icon border color */
     width: 35px;
     height: 35px;
-    position: absolute;
-    top: 129%;
-    left: 36%;
-    transform: translate(-50%, -50%);
     cursor: pointer; 
     background-color: none;
   }
+
 
   .bookmark-detail svg path {
     fill: none;
@@ -540,7 +566,6 @@ button a {
 a.item-detail {
     margin-top: 7em;
     margin-bottom: 2em;
-    text-decoration: none;
     color: var(--text-color-body);
     text-align: left;
 }
@@ -552,12 +577,18 @@ h3.samenvatting {
     margin-bottom: 0.5em;
 }
 
-p.item-samenvatting {
-    margin-left: 7.5em;
+p {
+    margin-right: 2em;
     margin-bottom: 0.5em;
     text-align: left;
-    margin-right: 1em;
+  
 }
+
+div.container {
+    margin-right: 1em;
+  
+}
+
 
 /* == FOOTER ==  */
 
@@ -572,6 +603,8 @@ p.copyright {
 
 /* ===== Sidebar ===== */
 
+
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -580,7 +613,7 @@ p.copyright {
     width: 250px;
     padding: 10px 14px;
     background: var(--sidebar-color);
-    /* transition: var(--tran-05); */
+    transition: var(--tran-05);
     z-index: 100;  
 }
 
@@ -631,7 +664,7 @@ p.copyright {
 
 .sidebar .text-long, .sidebar .icon{
         color: var(--text-color);
-        /* transition: var(--tran-03); */
+        transition: var(--tran-03);
 }
     
 .sidebar .text-long{
@@ -652,7 +685,7 @@ p.copyright {
     
 img {
         object-fit: cover;
-
+      
 }
 
 
@@ -898,8 +931,90 @@ body.dark .home .text {
 }
 
 
+.detail {
+    margin-top: 20px;
+}
+
+.details {
+    margin-bottom: 40px;
+}
 
 
+.detail-container {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.item-afbeelding {
+    max-width: 100%;
+    height: auto;
+} 
+
+/* .section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+} */
+
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-right: 1.5em;
+    border-radius: 8px;
+} 
+
+.section {
+    margin-bottom: 20px;
+}
+
+.samenvatting {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.item-samenvatting {
+    word-wrap: break-word; /* Allows text to wrap within the div */
+    white-space: normal; 
+    width: 100%;
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    text-align: justify;
+}
+
+
+        .back {
+            text-decoration: none;
+            color: #e30613; 
+            font-weight: light;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .item-detail {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .item-titel {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .titel-auteur {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+
+        .detail-container img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+
+
+        
 /* ===== Mediaquerie ===== */
 
  @media (min-width:375px) {
@@ -919,118 +1034,405 @@ body.dark .home .text {
         margin-top: 1em;
         margin-bottom: 1em;
     } 
-    
+
     }
 
     @media (min-width:425px) {
-    
-
-        /* article.detail-container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-        } */
-
-        /* article .profielen {
-            margin-left: 6.5em; 
-        } */
-
-
-  
- 
-
+        .container {
+            margin-right: 0px;
+        }
     }
         
 
 
     @media (min-width:650px) {
-         
-           /* .profielen-container {
-            display: grid;
-            justify-content: flex-start;
-            grid-template-columns: 1fr 1fr 1fr ;
-            grid-template-rows: 1fr 1fr  ;
-            grid-column-gap: 0;
-            grid-row-gap: 0;
-           }
 
-           .profielen {
-
-            margin-right: -4em;
-        } */
-        
-        
-
-           article.detail-container{
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-         } 
- 
-         article.container  {
-             display: flex;
-             flex-wrap: wrap;
-             gap: 10px;
-             align-items: center;
-
-         }
-         
-         article.formulier {
-             display: flex;
-             flex-direction: row;
-             flex-wrap: wrap;
- 
-         }
- 
-
+        .container {
+            margin-right: 0px;
         }
 
-    @media (min-width:768px) {
+        article.details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        article.formulier {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        article.section  {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+
+
 /* 
-        .profielen {
-           margin-left: 5em;
-        } */
-           
-    }
+        article.detail
+        {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 1em;
 
-    
-        @media (min-width:800px) {
+            } 
+
+            article.detail-container{
+            display: flex;
+            flex-direction: row;
+            gap: 1em;
+
+            } 
+
+            article.formulier {
+            display: flex;
+            justify-content: left;
+            } */
          
-            /* .profielen-container {
-                display: grid;
-                justify-content: flex-start;
-                grid-template-columns: 1fr 1fr 1fr 1fr ;
-                grid-template-rows: 1fr 1fr 1fr ;
-                grid-column-gap: 0;
-                grid-row-gap: 0;
-               } */
-             
-
-          
+           
 
 
+        /* } */
+/* 
+    article.details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    @media (min-width:900px) {
-
-        /* .profielen-container {
-            display: grid;
-            justify-content: flex-start;
-            grid-template-columns: 1fr 1fr 1fr 1fr  ;
-            grid-template-rows: 1fr 1fr 1fr ;
-            grid-column-gap: 0;
-            grid-row-gap: 0;
-           } */
-
-    
-    }
-
-    @media (min-width:1440px) {
-      
+    article.formulier {
+        display: flex;
+        justify-content: center;
+        align-items: center;
      
 
+       }
+
+    article.section  {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 5em;
+        margin-left: 5em;
         
+    } */
+
+
+        /* }   */
+
+/* 
+        article.detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr ;
+            grid-template-rows: 1fr 1fr  ;
+        
+        }
+        
+
+            article.details  {
+                display: flex;
+                flex-direction: row-reverse;
+            }
+
+         
+            article.detail-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            } 
+         
+          
+
+            img.item-afbeelding {
+            height: 20em;
+            } 
+ 
+  */
+            
+
+
+
+
+
+
+
+
+
     
+        @media (min-width:768px) {
+          
+            .back {
+                font-size: 1.1em;
+            }
+
+            .details {
+                padding: 25px;
+            }
+
+            .item-titel {
+                font-size: 1.8em;
+            }
+
+            .titel-auteur {
+                font-size: 1.4em;
+            }
+
+            .samenvatting {
+                font-size: 1.3em;
+            }
+
+            .item-samenvatting {
+                font-size: 1.1em;
+            }
+
+            .scroll-lijst {
+                scroll-snap-align: start;
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 240px; 
+           }
+          
+
+            .leeslijst {
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                margin: 0 auto;
+                padding-top: 4em;
+                padding-bottom: 3em;
+            }
+        }
+
+        
+
+        @media (min-width: 1024px) {
+            main {
+                padding: 40px;
+            }
+
+            /* .back {
+                font-size: 1.5em;
+            } */
+
+            .details {
+                padding: 30px;
+            }
+
+            .item-titel {
+                font-size: 2em;
+            }
+
+            .titel-auteur {
+                font-size: 1.5em;
+            }
+
+            .samenvatting {
+                font-size: 1.5em;
+            }
+
+            .item-samenvatting {
+                font-size: 1.2em;
+            }
+
+           
+
+            .scroll-container{
+                margin: 2em;
+                margin-left: 4em;
+            
+            }
+
+            h1.titel-favorieten {
+                margin-left: 2em;
+            }
+
+            .scroll-lijst {
+                scroll-snap-align: start;
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 240px; 
+           }
+          
+            .leeslijst {
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                margin: 0 auto;
+                padding-top: 4em;
+                padding-bottom: 3em;
+            }
+          
+    
+            
+        }
+          
+
+        @media (min-width: 1280px) {
+            main {
+                padding: 50px;
+            }
+        
+            /* .back {
+                font-size: 1.75em;
+            } */
+        
+            .details {
+                padding: 35px;
+            }
+        
+            .item-titel {
+                font-size: 2.25em;
+            }
+        
+            .titel-auteur {
+                font-size: 1.75em;
+            }
+        
+            .samenvatting {
+                font-size: 1.75em;
+            }
+        
+            .item-samenvatting {
+                font-size: 1.4em;
+            }
+    
+
+            .scroll-container{
+                margin: 1.5em;
+                margin-left: 4em;
+               
+            }
+
+            h1.titel-favorieten {
+                margin-left: 2em;
+            }
+
+            .scroll-lijst {
+                scroll-snap-align: start;
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 240px; 
+           }
+          
+
+            .leeslijst {
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                margin: 0 auto;
+                padding-top: 4em;
+                padding-bottom: 3em;
+            }
+        }
+        
+
+        @media (min-width: 1440px) {
+            main {
+                padding: 60px;
+            }
+        
+            /* .back {
+                font-size: 2em;
+            } */
+        
+            .details {
+                padding: 40px;
+            }
+        
+            .item-titel {
+                font-size: 2.5em;
+            }
+        
+            .titel-auteur {
+                font-size: 2em;
+            }
+        
+            .samenvatting {
+                font-size: 2em;
+            }
+        
+            .item-samenvatting {
+                font-size: 1.6em;
+            }
+
+
+            .scroll-container{
+                margin: 1.5em;
+                margin-left: 3.5em;
+       
+            }
+
+            h1.titel-favorieten {
+                margin-left: 1.7em;
+            }
+
+            .scroll-lijst {
+                scroll-snap-align: start;
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 240px; 
+           }
+
+            .leeslijst {
+                background-color: var(--sidebar-color); 
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                margin: 0 auto;
+                padding-top: 4em;
+                padding-bottom: 3em;
+            }
+        }
+
+ 
+
+  
+
+    /* @media (min-width:1100px) {
+      
+        main {
+            max-width: 1100px; 
+            margin: 20px auto;
+          }
+
     }
+          @media (min-width:1500px) {
+      
+            main {
+                max-width: 1300px; 
+                margin: 20px auto;
+              }      
+    
+    }  */
